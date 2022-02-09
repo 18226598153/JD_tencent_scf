@@ -50,7 +50,7 @@
 
    1. 运行青龙面板Docker镜像: `docker run -dit -v $PWD/ql/config:/ql/config -v $PWD/ql/log:/ql/log -v $PWD/ql/db:/ql/db -p 5600:5600 --name qinglong --hostname qinglong --restart always whyour/qinglong:latest`
    2. 在浏览器访问127.0.0.1:5600, 按照提示完成初始化
-3. 在青龙面板**右上角点击新建任务**, 如下配置:
+3. 在青龙面板**右上角点击新建任务**, 配置:
 
    - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "icon" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
    - 定时规则: 50 */2 * * *
@@ -60,6 +60,7 @@
    - 添加: export PT_KEY=""和export PT_PIN="", [获取方式点这里](./wiki/GetJdCookie.md)
    - 修改GithubProxyUrl为GithubProxyUrl=""
      ![img](image/README/1644421618420.png)
+5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
 
 ## 其他文档
 
