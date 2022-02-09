@@ -33,8 +33,8 @@ jobs:
           if [[ -z $TENCENT_SECRET_ID ]]; then echo TENCENT_SECRET_ID不可为空!; fi;
           if [[ -z $TENCENT_SECRET_KEY ]]; then echo TENCENT_SECRET_KEY不可为空!; fi;
           # serverless.yml和.env最后必须留一个空行
-          echo "      pt_key: $PT_KEY">> serverless.yml
-          echo "      pt_pin: $PT_PIN">> serverless.yml
+          echo "      PT_KEY: $PT_KEY">> serverless.yml
+          echo "      PT_PIN: $PT_PIN">> serverless.yml
           echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID >> .env
           echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env
           cat .env
