@@ -1,6 +1,6 @@
 //'use strict';
 exports.main_handler = async (event, context, callback) => {
-    console.log('云函数帮助:自己私库下readme文件,或者访问:https://github.com/zero205/JD_tencent_scf/tree/scf2')
+    console.log('开始执行...')
     let params = {}
     let scripts = []
     if (event["TriggerName"] == 'remote') {
