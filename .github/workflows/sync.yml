@@ -1,0 +1,24 @@
+name: 同步仓库代码 
+on:
+  schedule:
+    - cron: '0 16 * * *'
+  workflow_dispatch:
+jobs:
+  repo-sync:
+    env:
+      # PAT申请教程详见：https://www.jianshu.com/p/bb82b3ad1d11,需要repo和workflow权限
+      PAT: ${{ secrets.PAT }} 
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          persist-credentials: false
+      - name: sync jd-scripts
+        uses: repo-sync/github-sync@v2
+        if: ${{ env.PAT != ''}}
+        with:
+          source_repo: "https://github.com/cweijan/JD_tencent_scf.git"
+          source_branch: "master"
+          destination_branch: "master"
+          github_token: ${{ secrets.PAT }}

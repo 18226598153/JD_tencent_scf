@@ -1,0 +1,53 @@
+# 每次执行就是部署最新代码上云
+name: 云函数部署 
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '10 1,8,15 * * *'
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      TENCENT_REGION: ${{ secrets.SCF_REGION }}
+      TENCENT_FUNCTION_NAME: ${{ secrets.TENCENT_FUNCTION_NAME }}
+      TENCENT_MEMORYSIZE: ${{ secrets.TENCENT_MEMORYSIZE }}
+      TENCENT_TIMEOUT: ${{ secrets.TENCENT_TIMEOUT }}
+      TENCENT_SECRET_ID: ${{ secrets.TENCENT_SECRET_ID }}
+      TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
+      PT_PIN: ${{ secrets.PT_PIN }}
+      PT_KEY: ${{ secrets.PT_KEY }}
+    if: github.event.repository.owner.id == github.event.sender.id
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: set serverless.yml and push env
+        run: |
+          if [[ ! -z $TENCENT_REGION ]]; then sed -i -E 's/region:[^\n]+/region: '"$TENCENT_REGION"'/' serverless.yml; fi;
+          if [[ ! -z $TENCENT_FUNCTION_NAME ]]; then sed -i -E 's/^  name:[^\n]+/  name: '"$TENCENT_FUNCTION_NAME"'/' serverless.yml; fi;
+          if [[ ! -z $TENCENT_FUNCTION_NAME ]]; then sed -i -E 's/^name:[^\n]+/name: '"$TENCENT_FUNCTION_NAME"'/' serverless.yml; fi;
+          if [[ ! -z $TENCENT_MEMORYSIZE ]]; then sed -i -E 's/memorySize:[^\n]+/memorySize: '"$TENCENT_MEMORYSIZE"'/' serverless.yml; fi;
+          if [[ ! -z $TENCENT_TIMEOUT ]]; then sed -i -E 's/timeout:[^\n]+/timeout: '"$TENCENT_TIMEOUT"'/' serverless.yml; fi;
+          if [[ -z $PT_KEY ]]; then echo PT_KEY不可为空!; fi;
+          if [[ -z $PT_PIN ]]; then echo PT_PIN不可为空!; fi;
+          if [[ -z $TENCENT_SECRET_ID ]]; then echo TENCENT_SECRET_ID不可为空!; fi;
+          if [[ -z $TENCENT_SECRET_KEY ]]; then echo TENCENT_SECRET_KEY不可为空!; fi;
+          # serverless.yml和.env最后必须留一个空行
+          echo "      pt_key: $PT_KEY">> serverless.yml
+          echo "      pt_pin: $PT_PIN">> serverless.yml
+          echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID >> .env
+          echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env
+          cat .env
+          # PUSH_VARIS=$(sed -r 's/(process.env.[a-z0-9A-Z\_]+)/\1\n/g' src/sendNotify.js | sed -rn 's/.*process.env.([a-z0-9A-Z\_]+).*/\1/p' | sort | uniq)
+          # parameter=$(tr "\n" "|" <<< $PUSH_VARIS)
+          # parameter=${parameter::-1}
+          # grep -E "^($parameter):" < ./config.yml | sed 's/: /=/' | while read line;do    echo $line >> $GITHUB_ENV;done
+      - name: install dependency
+        if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && env.PT_KEY != '' && env.PT_PIN != '' }}"
+        run: |
+          npm i
+          npm i -g serverless
+      - name: deploy
+        if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && env.PT_KEY != '' && env.PT_PIN != '' }}"
+        run: |
+            (! (sls deploy | grep -E '错误信息|Error')) && echo '部署成功' || (echo '部署失败'; echo 'require("./src/sendNotify").sendNotify("云函数部署异常! 请重试","进入私库页面点击Action,进入对应action查看deploy步骤日志")' > notify.js; node notify.js; exit 1) 
