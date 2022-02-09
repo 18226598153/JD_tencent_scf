@@ -15,13 +15,12 @@
 
 ### 配置环境变量
 
-创建github账号, fork此仓库或以此仓库为模板创建仓库, 仓库建立完成, 在自己账号的项目内依次点击settings->secrets->Actions
+创建github账号, **fork此仓库**或以**此仓库为模板创建仓库**, 仓库建立完成, 在自己账号的项目内依次点击**settings->secrets->Actions**
 
 * 通过点击New repository secret, 分别添加:
   1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
   2. TENCENT_SECRET_KEY
-  3. PT_KEY: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
-  4. PT_PIN
+  3. PT_KEY和PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
 
 ![](image/README/1644421369528.png)
 
