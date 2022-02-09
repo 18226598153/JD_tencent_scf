@@ -43,7 +43,7 @@
 
 ## 本地部署
 
-需要熟悉Docker的使用方式, 推荐**专业人员**使用
+需要熟悉Docker的使用方式
 
 1. 安装Docker
 2. 安装青龙面板(用于定时执行刷京东脚本):
@@ -57,11 +57,11 @@
      ![img](image/README/1644410122098.png)
 4. 配置青龙面板
 
-   - 添加: export PT_KEY=""和export PT_PIN="", [获取方式看这里](./wiki/GetJdCookie.md)
+   - 添加: export PT_KEY=""和export PT_PIN="", [获取方式点这里](./wiki/GetJdCookie.md)
    - 修改GithubProxyUrl为GithubProxyUrl=""
      ![img](image/README/1644421618420.png)
 
-## 相关文档
+## 其他文档
 
 - [获取京东cookie](./wiki/GetJdCookie.md)
 - [环境变量集合](./wiki/githubAction.md)
