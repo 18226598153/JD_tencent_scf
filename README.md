@@ -60,6 +60,9 @@
      ![img](image/README/1644421618420.png)
 5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
 
+![image](https://user-images.githubusercontent.com/27798227/153328329-b0854a0b-a279-4be9-aabe-f27fee1bb752.png)
+
+
 ## 其他文档
 
 - [获取京东cookie](./wiki/GetJdCookie.md)
