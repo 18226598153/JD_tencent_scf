@@ -481,7 +481,7 @@ function BarkNotify(text, desp, params = {}) {
         }
       })
     } else {
-      console.log('您未提供Bark的APP推送BARK_PUSH，取消Bark推送消息通知🚫\n');
+      // console.log('您未提供Bark的APP推送BARK_PUSH，取消Bark推送消息通知🚫\n');
       resolve()
     }
   })
