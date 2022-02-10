@@ -4,8 +4,9 @@
 
 该仓库是刷京东京豆的脚本合集, 每个月能刷2000(抱歉忘记多少了, 少于这个数)左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署).
 
-- 注意cookie中的pt_key有有效期, 定期查看日志, cookie失效重新登陆获取
-- 云函数部署方式还有问题, 待修复, 先使用Docker方式
+注意cookie中的pt_key有有效期, 定期查看日志, cookie失效重新登陆获取
+
+云函数部署方式还不够稳定, 建议优先使用Docker方式
 
 ## 腾讯云函数部署
 
@@ -23,8 +24,9 @@
   1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
   2. TENCENT_SECRET_KEY
   3. PT_KEY和PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
+  4. TENCENT_FUNCTION_NAME: 云函数名称, 任意值, 不填会有几率导致部署失败
 
-![](image/README/1644421369528.png)
+![image](https://user-images.githubusercontent.com/27798227/153350464-52b14658-60ee-4b9c-a101-25a094e30f10.png)
 
 ### 部署
 
