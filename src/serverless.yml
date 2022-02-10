@@ -12,7 +12,6 @@ inputs:
     exclude:
       - '*.!(js|txt|json)'
       - 'backUp/**'
-      - 'icon/**'
       - 'package-lock.json'
       - 'LICENSE'
       - 'ql.js'
