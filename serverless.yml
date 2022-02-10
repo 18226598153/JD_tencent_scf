@@ -13,7 +13,6 @@ inputs:
       - '*.!(js|txt|json)'
       - 'backUp/**'
       - 'icon/**'
-      - 'package.json'
       - 'package-lock.json'
       - 'LICENSE'
       - 'ql.js'
