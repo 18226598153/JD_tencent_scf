@@ -6,8 +6,6 @@
 
 注意cookie中的pt_key有有效期, 定期查看日志, cookie失效重新登陆获取
 
-云函数部署方式还不够稳定, 建议优先使用Docker方式
-
 ## 腾讯云函数部署
 
 ### 开通云函数服务
@@ -42,7 +40,7 @@
 
 ### 日志和测试
 
-点击云函数, 可在**日志查询**面板查看日志.
+点击云函数, 可在**日志查询**面板查看定时执行的任务日志.
 
 ![](image/README/1644476536637.png)
 
@@ -58,7 +56,7 @@
 需要熟悉Docker的使用方式
 
 1. 安装Docker
-2. 安装青龙面板(用于定时执行刷京东脚本):
+2. 安装青龙面板(用于定时执行刷京豆脚本):
 
    1. 运行青龙面板Docker镜像: `docker run -dit -v $PWD/ql/config:/ql/config -v $PWD/ql/log:/ql/log -v $PWD/ql/db:/ql/db -p 5600:5600 --name qinglong --hostname qinglong --restart always whyour/qinglong:latest`
    2. 在浏览器访问127.0.0.1:5600, 按照提示完成初始化
