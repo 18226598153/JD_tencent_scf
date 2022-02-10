@@ -1,4 +1,4 @@
-/node_modules/
+node_modules
 /box.dat
 /CookieSet.json
 /jdCookie.js
