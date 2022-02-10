@@ -79,6 +79,7 @@
 ## 其他文档
 
 - [获取京东cookie](./wiki/GetJdCookie.md)
+- [二次开发简介](./wiki/二次开发简介.md)
 - [脚本列表](./wiki/scripts.md)
 - [环境变量集合](./wiki/githubAction.md)
 - [配置TG机器人](./wiki/TG_PUSH.md)
