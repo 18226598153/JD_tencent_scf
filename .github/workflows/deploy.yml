@@ -22,6 +22,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
       - name: set serverless.yml and push env
+        working-directory: ./src
         run: |
           if [[ ! -z $TENCENT_REGION ]]; then sed -i -E 's/region:[^\n]+/region: '"$TENCENT_REGION"'/' serverless.yml; fi;
           if [[ ! -z $TENCENT_FUNCTION_NAME ]]; then sed -i -E 's/^  name:[^\n]+/  name: '"$TENCENT_FUNCTION_NAME"'/' serverless.yml; fi;
@@ -43,6 +44,7 @@ jobs:
           # parameter=${parameter::-1}
           # grep -E "^($parameter):" < ./config.yml | sed 's/: /=/' | while read line;do    echo $line >> $GITHUB_ENV;done
       - name: install dependency
+        working-directory: ./src
         if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && env.PT_KEY != '' && env.PT_PIN != '' }}"
         run: |
           npm i
