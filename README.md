@@ -1,8 +1,8 @@
-# 京东打京豆脚本
+# 部署打京豆
 
 ## 简介
 
-刷京东京豆的脚本合集, 非脚本作者, 该仓库是对使用流程进行了简化, 每个月能打1500(不确定)左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署).
+打京豆的脚本部署流程, 非脚本作者, 该仓库为搬运工且以及加了流程, 每个月能打1500(不确定)左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署).
 
 ## 腾讯云函数部署
 
@@ -20,7 +20,7 @@
 
 1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
 2. TENCENT_SECRET_KEY
-3. PT_KEY、PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
+3. PT_KEY、PT_PIN: 登录后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取方式](./wiki/GetJdCookie.md)
 4. TENCENT_FUNCTION_NAME: 云函数名称, 任意值, 不填会有几率导致部署失败
 
 ![image](https://user-images.githubusercontent.com/27798227/153350464-52b14658-60ee-4b9c-a101-25a094e30f10.png)
@@ -65,7 +65,7 @@
 需要熟悉Docker的使用方式
 
 1. 安装Docker
-2. 安装青龙面板(用于定时执行刷京豆脚本):
+2. 安装青龙面板(用于定时执行脚本):
 
    1. 运行青龙面板Docker镜像: `docker run -dit -v $PWD/ql/config:/ql/config -v $PWD/ql/log:/ql/log -v $PWD/ql/db:/ql/db -p 5600:5600 --name qinglong --hostname qinglong --restart always whyour/qinglong:latest`
    2. 在浏览器访问127.0.0.1:5600, 按照提示完成初始化
@@ -82,13 +82,6 @@
 5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
 
 ![image](https://user-images.githubusercontent.com/27798227/153328329-b0854a0b-a279-4be9-aabe-f27fee1bb752.png)
-
-## 其他文档
-
-- [二次开发简介](./wiki/二次开发简介.md)
-- [脚本列表](./wiki/scripts.md)
-- [环境变量集合](./wiki/githubAction.md)
-- [配置TG机器人](./wiki/TG_PUSH.md)
 
 ## 特别声明
 
