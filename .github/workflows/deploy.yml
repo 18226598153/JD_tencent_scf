@@ -39,6 +39,7 @@ jobs:
           echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID >> .env
           echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env
           cat .env
+          cat serverless.yml
           # PUSH_VARIS=$(sed -r 's/(process.env.[a-z0-9A-Z\_]+)/\1\n/g' src/sendNotify.js | sed -rn 's/.*process.env.([a-z0-9A-Z\_]+).*/\1/p' | sort | uniq)
           # parameter=$(tr "\n" "|" <<< $PUSH_VARIS)
           # parameter=${parameter::-1}
