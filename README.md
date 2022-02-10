@@ -77,6 +77,7 @@
 ## 其他文档
 
 - [获取京东cookie](./wiki/GetJdCookie.md)
+- [脚本列表](./wiki/scripts.md)
 - [环境变量集合](./wiki/githubAction.md)
 - [配置TG机器人](./wiki/TG_PUSH.md)
 - [同步代码仓库](./wiki/reposync.md)
