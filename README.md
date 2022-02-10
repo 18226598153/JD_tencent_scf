@@ -10,31 +10,31 @@
 
 创建腾讯云账号, 依次登录 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，确保账户下已开通服务并创建相应[服务角色](https://console.cloud.tencent.com/cam/role)**SCF_QcsRole、SLS_QcsRole**, 由于腾讯云日志服务不再免费, 腾讯云余额为0则建议往账户里面充值1元, 防止欠费被禁用.
 
-> 注意！为了确保权限足够，获取这两个参数时不要使用子账户！此外，腾讯云账户需要[实名认证](https://console.cloud.tencent.com/developer/auth)。
+> 为了确保权限足够，不要使用子账户！腾讯云账户需要[实名认证](https://console.cloud.tencent.com/developer/auth)才可使用。
 
 ### 配置环境变量
 
-创建github账号, **fork此仓库**或以**此仓库为模板创建仓库**, 仓库建立完成, 在自己账号的项目内依次点击**settings->secrets->Actions**
+创建github账号, **fork此仓库**或以此[仓库模板创建(推荐)](./wiki/importRepo.md), 仓库建立完成, 在**自己的仓库**内依次点击**settings->secrets->Actions**
 
-通过点击New repository secret, 分别添加:
+通过点击**New repository secret**, 分别添加:
 
 1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
 2. TENCENT_SECRET_KEY
-3. PT_KEY和PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
+3. PT_KEY、PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
 4. TENCENT_FUNCTION_NAME: 云函数名称, 任意值, 不填会有几率导致部署失败
 
 ![image](https://user-images.githubusercontent.com/27798227/153350464-52b14658-60ee-4b9c-a101-25a094e30f10.png)
 
 ### 部署
 
-点击Actions->云函数部署, 点击Run workflow, 等待运行完成, 没报错就是部署成功, 访问[腾讯云函数](https://console.cloud.tencent.com/scf/list), 即可查看最新部署的函数
+点击Actions->云函数部署, 先点击Enable WorkFlow启用, 再点击Run workflow, 等待运行完成, 没报错就是部署成功, 访问[腾讯云函数](https://console.cloud.tencent.com/scf/list), 即可查看最新部署的函数
 
 ![image](https://user-images.githubusercontent.com/6993269/99513289-6a152980-29c5-11eb-9266-3f56ba13d3b2.png)
 
 有两种情况可能部署失败
 
 1. 上传函数超时: 重新执行部署工作流直至成功
-2. 未配置TENCENT_FUNCTION_NAME参数, 不配置会导致失败, 这应该是腾讯云的bug
+2. 未配置TENCENT_FUNCTION_NAME参数, 不配置会导致失败, 这是腾讯云的bug
 
 ### 日志和测试
 
@@ -46,8 +46,19 @@
 
 1. 点击云函数->函数代码->切换到旧版编辑器
 2. 拉到编辑器下面, 就可以看到测试输入框了
+3. 将message修改中的内容修改为脚本对应的名称, 测试多个脚本通过&符号连接.
 
-![](image/README/1644476708924.png)
+![img](image/README/1644476708924.png)
+
+### 自动同步代码
+
+会自动同步你的仓库为该仓库的最新代码, 步骤:
+
+1. [点此生成一个 token](https://github.com/settings/tokens/new) ，需勾选 `repo`和 `workflow`, 然后点击最下面的**Create Token**按钮。
+2. 在仓库内**settings->secrets->Actions**中添加一个名为为**PAT**, 值为刚才创建的Token.
+3. 进入Action中的同步仓库代码, 选中Enable WorkFlow, 然后就会定时执行同步Action了, 也可手动执行
+
+![](image/README/1644497801258.png)
 
 ## 本地部署
 
@@ -74,12 +85,10 @@
 
 ## 其他文档
 
-- [获取京东cookie](./wiki/GetJdCookie.md)
 - [二次开发简介](./wiki/二次开发简介.md)
 - [脚本列表](./wiki/scripts.md)
 - [环境变量集合](./wiki/githubAction.md)
 - [配置TG机器人](./wiki/TG_PUSH.md)
-- [同步代码仓库](./wiki/reposync.md)
 
 ## 特别声明
 
