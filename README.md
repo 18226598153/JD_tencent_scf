@@ -20,7 +20,7 @@
 
 创建github账号, **fork此仓库**或以**此仓库为模板创建仓库**, 仓库建立完成, 在自己账号的项目内依次点击**settings->secrets->Actions**
 
-* 通过点击New repository secret, 分别添加:
+通过点击New repository secret, 分别添加:
   1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
   2. TENCENT_SECRET_KEY
   3. PT_KEY和PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
@@ -33,6 +33,10 @@
 点击Actions->云函数部署, 点击Run workflow, 等待运行完成, 没报错就是部署成功, 访问[腾讯云函数](https://console.cloud.tencent.com/scf/list), 即可查看最新部署的函数
 
 ![image](https://user-images.githubusercontent.com/6993269/99513289-6a152980-29c5-11eb-9266-3f56ba13d3b2.png)
+
+有两种情况可能部署失败
+1. 上传函数超时: 重新执行部署工作流直至成功
+2. 未配置TENCENT_FUNCTION_NAME参数, 不配置会导致失败, 这应该是腾讯云的bug
 
 ### 日志和测试
 
