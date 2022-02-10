@@ -21,10 +21,11 @@
 创建github账号, **fork此仓库**或以**此仓库为模板创建仓库**, 仓库建立完成, 在自己账号的项目内依次点击**settings->secrets->Actions**
 
 通过点击New repository secret, 分别添加:
-  1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
-  2. TENCENT_SECRET_KEY
-  3. PT_KEY和PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
-  4. TENCENT_FUNCTION_NAME: 云函数名称, 任意值, 不填会有几率导致部署失败
+
+1. TENCENT_SECRET_ID: 进入[腾讯云密钥](https://console.cloud.tencent.com/cam/capi), 点击新建密钥后就会生成**SecretId**和**SecretKey**
+2. TENCENT_SECRET_KEY
+3. PT_KEY和PT_PIN: 登录移动版京东后可从cookie中得到**PT_KEY**和**PT_PIN**, [获取教程](./wiki/GetJdCookie.md)
+4. TENCENT_FUNCTION_NAME: 云函数名称, 任意值, 不填会有几率导致部署失败
 
 ![image](https://user-images.githubusercontent.com/27798227/153350464-52b14658-60ee-4b9c-a101-25a094e30f10.png)
 
@@ -35,18 +36,22 @@
 ![image](https://user-images.githubusercontent.com/6993269/99513289-6a152980-29c5-11eb-9266-3f56ba13d3b2.png)
 
 有两种情况可能部署失败
+
 1. 上传函数超时: 重新执行部署工作流直至成功
 2. 未配置TENCENT_FUNCTION_NAME参数, 不配置会导致失败, 这应该是腾讯云的bug
 
 ### 日志和测试
 
-在左侧栏的日志查询中，可以查看到触发的日志，包括是否打卡成功等。
+点击云函数, 可在**日志查询**面板查看日志.
 
-测试流程:
+![](image/README/1644476536637.png)
 
-1. 等待定时任务执行, 之后在触发日志查看运行结果
-2. 自己参照图内填写测试脚本名称,不带后缀,测什么,填什么
-   ![测试函数](https://user-images.githubusercontent.com/6993269/99628053-5a9eea80-2a70-11eb-906f-f1d5ea2bfa3a.png)
+手动测试流程:
+
+1. 点击云函数->函数代码->切换到旧版编辑器
+2. 拉到编辑器下面, 就可以看到测试输入框了
+
+![](image/README/1644476708924.png)
 
 ## 本地部署
 
