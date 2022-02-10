@@ -2,7 +2,7 @@
 
 ## 简介
 
-该仓库是刷京东京豆的脚本合集, 相比其他仓库是对使用流程进行了简化, 每个月能刷1500京豆左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署).
+该仓库是刷京东京豆的脚本合集, 脚本非原创, 相比其他仓库是对使用流程进行了简化, 每个月能刷1500京豆左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署).
 
 注意cookie中的pt_key有有效期, 定期查看日志, cookie失效重新登陆获取
 
@@ -10,7 +10,7 @@
 
 ### 开通云函数服务
 
-创建腾讯云账号, 依次登录 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，确保账户下已开通服务并创建相应[服务角色](https://console.cloud.tencent.com/cam/role)**SCF_QcsRole、SLS_QcsRole**, 由于腾讯云日志服务不再免费, 新用户建议往账户里面充值1元
+创建腾讯云账号, 依次登录 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，确保账户下已开通服务并创建相应[服务角色](https://console.cloud.tencent.com/cam/role)**SCF_QcsRole、SLS_QcsRole**, 由于腾讯云日志服务不再免费, 腾讯云余额为0则建议往账户里面充值1元, 防止欠费被禁用.
 
 > 注意！为了确保权限足够，获取这两个参数时不要使用子账户！此外，腾讯云账户需要[实名认证](https://console.cloud.tencent.com/developer/auth)。
 
