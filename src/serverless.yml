@@ -65,4 +65,5 @@ inputs:
           argument: jd_redrain_half
   environment:
     variables: #环境变量
+      JD_JOIN_ZLC: false
       TZ: Asia/Shanghai
