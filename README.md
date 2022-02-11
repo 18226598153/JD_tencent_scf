@@ -8,7 +8,7 @@
 
 ### 开通云函数服务
 
-创建腾讯云账号, 依次登录 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，确保账户下已开通服务并创建相应[服务角色](https://console.cloud.tencent.com/cam/role)**SCF_QcsRole、SLS_QcsRole**, 由于腾讯云日志服务不再免费, 腾讯云余额为0则建议往账户里面充值1元, 防止欠费被禁用.
+创建腾讯云账号, 依次进入 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，并创建相应[服务角色](https://console.cloud.tencent.com/cam/role)**SCF_QcsRole、SLS_QcsRole**, 腾讯云日志服务不再免费, 余额为0建议往账户里面充值1元, 防止欠费被禁用.
 
 > 为了确保权限足够，不要使用子账户！腾讯云账户需要[实名认证](https://console.cloud.tencent.com/developer/auth)才可使用。
 
