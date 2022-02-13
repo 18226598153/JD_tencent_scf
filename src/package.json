@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/cweijan/JD_tencent_scf.git"
   },
   "keywords": [
     "京东薅羊毛工具, 京东水果、宠物、种豆等等"
@@ -21,6 +21,8 @@
     "png-js": "^1.0.0",
     "request": "^2.88.2",
     "tough-cookie": "^4.0.0",
+    "download": "^6.2.5",
+    "http-server": "^0.12.3",
     "tunnel": "0.0.6",
     "ws": "^7.5.3",
     "jsdom": "^17.0.0"

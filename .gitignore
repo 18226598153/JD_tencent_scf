@@ -4,3 +4,4 @@ node_modules
 /jdCookie.js
 /JD_DailyBonus.js
 package-lock.json
+/sync/
