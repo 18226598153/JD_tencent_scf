@@ -33,7 +33,6 @@ exports.main_handler = async (event, context, callback) => {
                     .stack // Grabs the stack trace
                     .split('\n')[2] // Grabs third line
                     .split("/").slice(-1)[0] // Grabs  file name and line number
-                    .replace('.js', '')
                 stack = `${stack.substring(0, stack.lastIndexOf(':'))}:`
                 originalMethod.apply(
                     console,

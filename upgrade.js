@@ -1,6 +1,7 @@
 const { existsSync, readdirSync, copyFile } = require("fs");
 const { extname } = require("path");
 const chalk = require('chalk');
+const { execSync, exec } = require("child_process");
 
 const syncDir = __dirname + "/sync";
 if (!existsSync(syncDir)) {
@@ -12,7 +13,7 @@ const files = readdirSync(syncDir)
 const newFiles=[];
 for (const file of files) {
     const ext = extname(file).toLowerCase();
-    if (file == 'package.json' || (ext == '.js' && file.startsWith("jd"))) {
+    if (file == 'package.json' || (ext == '.js' && file.startsWith("jd") && file!='jdCookie.js')) {
         const nFile = `${syncDir}/${file}`;
         const oFile = `${__dirname}/src/${file}`;
         const hasOld=existsSync(oFile);
@@ -27,4 +28,5 @@ for (const file of files) {
 
 for (const file of newFiles) {
     console.log(chalk.green(`新增脚本${file}`))
+    exec(`git add src/${file}`)
 }
