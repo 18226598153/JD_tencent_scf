@@ -17,7 +17,7 @@ jobs:
       TENCENT_SECRET_KEY: ${{ secrets.TENCENT_SECRET_KEY }}
       PT_PIN: ${{ secrets.PT_PIN }}
       PT_KEY: ${{ secrets.PT_KEY }}
-    if: github.event.repository.owner.id == github.event.sender.id
+      JD_COOKIE: ${{ secrets.JD_COOKIE }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -29,15 +29,12 @@ jobs:
           if [[ ! -z $TENCENT_FUNCTION_NAME ]]; then sed -i -E 's/^name:[^\n]+/name: '"$TENCENT_FUNCTION_NAME"'/' serverless.yml; fi;
           if [[ ! -z $TENCENT_MEMORYSIZE ]]; then sed -i -E 's/memorySize:[^\n]+/memorySize: '"$TENCENT_MEMORYSIZE"'/' serverless.yml; fi;
           if [[ ! -z $TENCENT_TIMEOUT ]]; then sed -i -E 's/timeout:[^\n]+/timeout: '"$TENCENT_TIMEOUT"'/' serverless.yml; fi;
-          if [[ -z $PT_KEY ]]; then echo PT_KEY不可为空!; fi;
-          if [[ -z $PT_PIN ]]; then echo PT_PIN不可为空!; fi;
+          # serverless.yml和.env最后必须留一个空行
           if [[ -z $TENCENT_SECRET_ID ]]; then echo TENCENT_SECRET_ID不可为空!; fi;
           if [[ -z $TENCENT_SECRET_KEY ]]; then echo TENCENT_SECRET_KEY不可为空!; fi;
-          # serverless.yml和.env最后必须留一个空行
-          echo "      PT_KEY: $PT_KEY">> serverless.yml
-          echo "      PT_PIN: $PT_PIN">> serverless.yml
-          echo TENCENT_SECRET_ID=$TENCENT_SECRET_ID >> .env
-          echo TENCENT_SECRET_KEY=$TENCENT_SECRET_KEY >> .env
+          if [[ -z $PT_KEY ]]; then echo PT_KEY为空, 将尝试使用JD_COOKIE!; else echo "      PT_KEY: $PT_KEY">> serverless.yml; fi;
+          if [[ -z $PT_PIN ]]; then echo PT_PIN为空, 将尝试使用JD_COOKIE!; else echo "      PT_PIN: $PT_PIN">> serverless.yml; fi;
+          if [[ -z $JD_COOKIE ]]; then echo JD_COOKIE为空, 将尝试PT_KEY和PT_PIN!; else echo "      JD_COOKIE: $JD_COOKIE">> serverless.yml; fi;
           cat .env
           cat serverless.yml
           # PUSH_VARIS=$(sed -r 's/(process.env.[a-z0-9A-Z\_]+)/\1\n/g' src/sendNotify.js | sed -rn 's/.*process.env.([a-z0-9A-Z\_]+).*/\1/p' | sort | uniq)
@@ -46,12 +43,12 @@ jobs:
           # grep -E "^($parameter):" < ./config.yml | sed 's/: /=/' | while read line;do    echo $line >> $GITHUB_ENV;done
       - name: install dependency
         working-directory: ./src
-        if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && env.PT_KEY != '' && env.PT_PIN != '' }}"
+        if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && ((env.PT_KEY != '' && env.PT_PIN != '') || env.JD_COOKIE != '' ) }}"
         run: |
           npm i
           npm i -g serverless
       - name: deploy
         working-directory: ./src
-        if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && env.PT_KEY != '' && env.PT_PIN != '' }}"
+        if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && ((env.PT_KEY != '' && env.PT_PIN != '') || env.JD_COOKIE != '' ) }}"
         run: |
             (! (sls deploy | grep -E '错误信息|Error')) && echo '部署成功' || (echo '部署失败'; echo 'require("./sendNotify").sendNotify("云函数部署异常! 请重试","进入私库页面点击Action,进入对应action查看deploy步骤日志")' > notify.js; node notify.js; exit 1) 
