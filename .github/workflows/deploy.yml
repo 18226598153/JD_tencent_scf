@@ -50,6 +50,7 @@ jobs:
         run: |
           npm i
           npm i -g serverless
+          npm list -g --depth 0|grep serverless
       - name: deploy
         working-directory: ./src
         if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && env.PT_KEY != '' && env.PT_PIN != '' }}"
