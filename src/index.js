@@ -1,9 +1,9 @@
+const { execFile } = require('child_process');
 const { readFileSync, existsSync } = require('fs')
 /**
  * 脚本触发器列表:
  * - config: 每小时候执行一次config.json中配置的脚本, 当前小时和脚本配置的小时一致时, 进行执行
  * - 其他cron: 都是单脚本, argument中指定的就是脚本名称
- * 同异步执行: 每个脚本同步执行, 可在param配置timeout, 异步就是脚本同时执行
  */
 exports.main_handler = async (event, context, callback) => {
     console.log(`开始执行: 参数为:${JSON.stringify(event)}`)
@@ -44,16 +44,41 @@ exports.main_handler = async (event, context, callback) => {
             }
         }
     })
-    for (const script of scripts) {
-        console.log(`run script:${script}`)
-        const name = './' + script + '.js'
-        try {
-            require(name)
-        } catch (e) {
-            console.error(`异步${script}异常:`, e)
+    // 脚本只能通过新开进程来检测结束状态, 当要执行的脚本数量小于4时, 采取多进程的方式执行, 用于显示完整日志.
+    if(scripts.length<=4){
+        const tasks = scripts.map(script => {
+            console.log(`run script:${script}`)
+            const name = './' + script + '.js'
+            return new Promise((resolve) => {
+                const child = execFile(process.execPath, [name])
+                child.stdout.on('data', function (data) {
+                    console.log(data)
+                })
+                child.stderr.on('data', function (data) {
+                    console.error(data)
+                })
+                child.on('close', function (code) {
+                    console.log(`${script} finished`)
+                    delete child
+                    resolve()
+                })
+            })
+        })
+        await Promise.all(tasks)
+    }else{
+        for (const script of scripts) {
+            console.log(`run script:${script}`)
+            const name = './' + script + '.js'
+            try {
+                require(name)
+            } catch (e) {
+                console.error(`异步${script}异常:`, e)
+            }
         }
+        return '脚本执行中...'
     }
 
+    return '执行完毕';``
 }
 
 
