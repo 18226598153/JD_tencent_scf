@@ -3,7 +3,9 @@
  */
 //此处填写京东账号cookie。
 // 账号一ck,例:pt_key=XXX;pt_pin=XXX;
-let CookieJDs = [ ]
+let CookieJDs = [ 
+  // 'pt_key=XXX;pt_pin=XXX'
+]
 // 判断环境变量里面是否有京东ck
 
 if(process.env.PT_KEY && process.env.PT_PIN){
