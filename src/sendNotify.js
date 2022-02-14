@@ -11,7 +11,7 @@
  */
 
 const querystring = require('querystring');
-const { getEnv } = require('./util/getEnv');
+const { getEnv } = require('./getEnv');
 const $ = new Env();
 const timeout = 15000; //超时时间(单位毫秒)
 // =======================================gotify通知设置区域==============================================

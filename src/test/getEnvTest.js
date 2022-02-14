@@ -1,4 +1,4 @@
-const { getEnv } = require("../util/getEnv");
+const { getEnv } = require("../getEnv");
 
 // set jd_cookie=1 && node getEnvTest.js 
 

@@ -6,7 +6,7 @@ https://raw.githubusercontent.com/aTenb/jdOpenSharePicker/master/jd_beautyStudy.
 活动入口：京东app首页-美妆馆-底部中间按钮
 20 7,12,19 * * * jd_beautyStudy.js, tag=美丽研究院, img-url=https://raw.githubusercontent.com/Orz-3/mini/master/Color/jd.png, enabled=true
  */
-const { Env } = require('./util/env');
+const { Env } = require('./env');
 const WebSocket = require('ws');
 const $ = new Env('美丽研究院');
 const notify = $.isNode() ? require('./sendNotify') : '';

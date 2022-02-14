@@ -1,4 +1,4 @@
-const { getEnv } = require("./util/getEnv");
+const { getEnv } = require("./getEnv");
 
 // 账号一ck,例:pt_key=XXX;pt_pin=XXX;
 let CookieJDs = [
@@ -34,3 +34,4 @@ for (let i = 0; i < CookieJDs.length; i++) {
   const index = (i + 1 === 1) ? '' : (i + 1);
   exports['CookieJD' + index] = CookieJDs[i].trim();
 }
+exports['cookies']=CookieJDs;

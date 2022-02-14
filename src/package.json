@@ -16,15 +16,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.26.0",
     "crypto-js": "^4.1.1",
+    "download": "^6.2.5",
     "got": "^11.8.2",
+    "http-server": "^0.12.3",
+    "jsdom": "^17.0.0",
     "png-js": "^1.0.0",
     "request": "^2.88.2",
     "tough-cookie": "^4.0.0",
-    "download": "^6.2.5",
-    "http-server": "^0.12.3",
     "tunnel": "0.0.6",
-    "ws": "^7.5.3",
-    "jsdom": "^17.0.0"
+    "ws": "^7.5.3"
   }
 }

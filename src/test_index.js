@@ -5,5 +5,6 @@ const { main_handler } = require(".");
 main_handler({
     // TriggerName:"config"
     // Message:"all"
-    Message:"jd_car"
+    async:true,
+    Message:"jd_CheckCK"
 })
