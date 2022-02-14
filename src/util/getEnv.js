@@ -10,7 +10,7 @@ function getEnv(name) {
     if (!existsSync(envFile)) return null;
 
     try {
-        const env = readFileSync(envFile, 'utf-8')
+        const env = JSON.parse(readFileSync(envFile, 'utf-8'))
         return env[name] || env[name.toLowerCase()] || env[name.toUpperCase()]
     } catch (error) {
         console.log('读取配置文件失败:', error)
