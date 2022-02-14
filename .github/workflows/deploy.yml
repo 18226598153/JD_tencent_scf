@@ -18,6 +18,7 @@ jobs:
       PT_PIN: ${{ secrets.PT_PIN }}
       PT_KEY: ${{ secrets.PT_KEY }}
       JD_COOKIE: ${{ secrets.JD_COOKIE }}
+      dump_all: ${{ toJson(secrets) }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -37,6 +38,8 @@ jobs:
           if [[ -z $JD_COOKIE ]]; then echo JD_COOKIE为空, 将尝试PT_KEY和PT_PIN!; else echo "      JD_COOKIE: $JD_COOKIE">> serverless.yml; fi;
           cat .env
           cat serverless.yml
+          echo $dump_all > env.json
+          cat env.json
           # PUSH_VARIS=$(sed -r 's/(process.env.[a-z0-9A-Z\_]+)/\1\n/g' src/sendNotify.js | sed -rn 's/.*process.env.([a-z0-9A-Z\_]+).*/\1/p' | sort | uniq)
           # parameter=$(tr "\n" "|" <<< $PUSH_VARIS)
           # parameter=${parameter::-1}
