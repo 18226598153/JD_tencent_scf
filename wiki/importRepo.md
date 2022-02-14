@@ -5,3 +5,5 @@
 3. 随意设置仓库名, 并勾选为Private, 点击Begin Import开始导入, 等待约1分钟完成
 
 ![](image/importRepo/1644498569829.png)
+4. 在仓库内点击settings->actions->Allow all actions->Save
+![image](https://user-images.githubusercontent.com/27798227/153807824-ac7f7949-0ce6-47d5-9942-9c9ecd993362.png)
