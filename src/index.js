@@ -46,7 +46,7 @@ exports.main_handler = async (event, context, callback) => {
         }
     })
     // 脚本只能通过新开进程来检测结束状态, 当要执行的脚本数量小于4时, 采取多进程的方式执行, 用于显示完整日志.
-    if(scripts.length<=1 || msg=='all' && !async){
+    if((scripts.length<=1 || msg=='all') && !async){
         const tasks = scripts.map(script => {
             console.log(`run script:${script}`)
             const name = './' + script + '.js'
