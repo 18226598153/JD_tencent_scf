@@ -18,7 +18,7 @@ jobs:
       PT_PIN: ${{ secrets.PT_PIN }}
       PT_KEY: ${{ secrets.PT_KEY }}
       JD_COOKIE: ${{ secrets.JD_COOKIE }}
-      dump_all: ${{ toJson(secrets) }}
+      ALL_SECRETS: ${{ toJson(secrets) }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
@@ -33,17 +33,11 @@ jobs:
           # serverless.yml和.env最后必须留一个空行
           if [[ -z $TENCENT_SECRET_ID ]]; then echo TENCENT_SECRET_ID不可为空!; fi;
           if [[ -z $TENCENT_SECRET_KEY ]]; then echo TENCENT_SECRET_KEY不可为空!; fi;
-          if [[ -z $PT_KEY ]]; then echo PT_KEY为空, 将尝试使用JD_COOKIE!; else echo "      PT_KEY: $PT_KEY">> serverless.yml; fi;
-          if [[ -z $PT_PIN ]]; then echo PT_PIN为空, 将尝试使用JD_COOKIE!; else echo "      PT_PIN: $PT_PIN">> serverless.yml; fi;
-          if [[ -z $JD_COOKIE ]]; then echo JD_COOKIE为空, 将尝试PT_KEY和PT_PIN!; else echo "      JD_COOKIE: $JD_COOKIE">> serverless.yml; fi;
-          cat .env
-          cat serverless.yml
-          echo $dump_all > env.json
+          if [[ -z $PT_KEY ]]; then echo PT_KEY为空, 将尝试使用JD_COOKIE!; fi;
+          if [[ -z $PT_PIN ]]; then echo PT_PIN为空, 将尝试使用JD_COOKIE!; fi;
+          if [[ -z $JD_COOKIE ]]; then echo JD_COOKIE为空, 将尝试PT_KEY和PT_PIN!; fi;
+          echo $ALL_SECRETS > env.json
           cat env.json
-          # PUSH_VARIS=$(sed -r 's/(process.env.[a-z0-9A-Z\_]+)/\1\n/g' src/sendNotify.js | sed -rn 's/.*process.env.([a-z0-9A-Z\_]+).*/\1/p' | sort | uniq)
-          # parameter=$(tr "\n" "|" <<< $PUSH_VARIS)
-          # parameter=${parameter::-1}
-          # grep -E "^($parameter):" < ./config.yml | sed 's/: /=/' | while read line;do    echo $line >> $GITHUB_ENV;done
       - name: install dependency
         working-directory: ./src
         if: "${{ env.TENCENT_SECRET_ID != '' && env.TENCENT_SECRET_KEY != '' && ((env.PT_KEY != '' && env.PT_PIN != '') || env.JD_COOKIE != '' ) }}"
