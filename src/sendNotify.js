@@ -186,44 +186,27 @@ if (process.env.PUSH_PLUS_USER) {
  * @param text 通知头
  * @param desp 通知体
  * @param params 某些推送通知方式点击弹窗可跳转, 例：{ url: 'https://abc.com' }
- * @param author 作者仓库等信息  例：`本通知 By：https://github.com/whyour/qinglong`
+ * @param mark 作者仓库等信息  例：`本通知 By：https://github.com/whyour/qinglong`
  * @returns {Promise<unknown>}
  */
-async function sendNotify( text, desp, params = {'TG交流群':'https://t.me/jd_zero_205'}, author = '\n\n请更新拉库命令:https://github.com/zero205/JD_tencent_scf/tree/main', ) {
-  let no_notify = process.env.no_notify
-  if (no_notify) {
-    no_notify = process.env.no_notify.split('&')
-    if (module.parent.filename) {
-      const script_name = module.parent.filename.split('/').slice(-1)[0]
-      if (no_notify.some(key_word => {
-        const flag = script_name.includes(key_word)
-        if (flag) {
-          console.log(`${script_name}含有关键字${key_word},不推送`)
-        }
-        return flag
-      })) {
-        return
-      }
-    }
-  }
-  //提供6种通知
-  desp += author; //增加作者信息，防止被贩卖等
+async function sendNotify( text, desp,param) {
+  desp += '\n\n部署文档:https://github.com/cweijan/JD_tencent_scf.git';
   await Promise.all([
     serverNotify(text, desp), //微信server酱
     pushPlusNotify(text, desp), //pushplus(推送加)
   ]);
   //由于上述两种微信通知需点击进去才能查看到详情，故text(标题内容)携带了账号序号以及昵称信息，方便不点击也可知道是哪个京东哪个活动
-  text = text.match(/.*?(?=\s?-)/g) ? text.match(/.*?(?=\s?-)/g)[0] : text;
-  await Promise.all([
-    BarkNotify(text, desp, params), //iOS Bark APP
-    tgBotNotify(text, desp), //telegram 机器人
-    ddBotNotify(text, desp), //钉钉机器人
-    qywxBotNotify(text, desp), //企业微信机器人
-    qywxamNotify(text, desp), //企业微信应用消息推送
-    iGotNotify(text, desp, params), //iGot
-    gobotNotify(text, desp),//go-cqhttp
-    gotifyNotify(text, desp),//gotify
-  ]);
+  // text = text.match(/.*?(?=\s?-)/g) ? text.match(/.*?(?=\s?-)/g)[0] : text;
+  // await Promise.all([
+  //   // BarkNotify(text, desp, params), //iOS Bark APP
+  //   // tgBotNotify(text, desp), //telegram 机器人
+  //   // ddBotNotify(text, desp), //钉钉机器人
+  //   // qywxBotNotify(text, desp), //企业微信机器人
+  //   // qywxamNotify(text, desp), //企业微信应用消息推送
+  //   // iGotNotify(text, desp, params), //iGot
+  //   // gobotNotify(text, desp),//go-cqhttp
+  //   // gotifyNotify(text, desp),//gotify
+  // ]);
 }
 
 function gotifyNotify(text, desp) {

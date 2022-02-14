@@ -92,10 +92,10 @@
 
 ## 消息推送
 
-当cookie失效后进行消息推送, 将对应推送的**Token**加到**环境变量**即可推送
+当cookie失效后或获得京豆时进行消息推送, 将对应推送的**Token**加到**环境变量**即可推送
 
-- [Server酱](https://sct.ftqq.com/sendkey): PUSH_KEY
 - [推送加](http://www.pushplus.plus/): PUSH_PLUS_TOKEN
+- [~~Server酱(不推荐)~~](https://sct.ftqq.com/sendkey): PUSH_KEY
 
 ## 特别声明
 
