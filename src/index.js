@@ -61,7 +61,7 @@ function loadScripts(msg, includeAll) {
     let now_hour = (new Date().getUTCHours() + 8) % 24
     console.log('hourly config触发,当前:', now_hour)
     if (msg) {
-        const hour = Number(event["Message"])
+        const hour = Number(msg)
         if (!isNaN(hour) && hour >= 0 && hour <= 23) {
             now_hour = hour
             console.log('hourly config触发,自定义触发小时:', now_hour)
