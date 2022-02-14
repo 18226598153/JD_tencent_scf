@@ -89,7 +89,7 @@ $.newShareCode = [];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = j + 1;
       await shareCodesFormat();
-      // await doHelp()
+      await doHelp()
     }
   }
   if ($.isNode() && allMessage) {
@@ -416,13 +416,8 @@ function showTaskProcess() {
 }
 //助力好友
 async function doHelp() {
-  if ($.isNode() && !process.env.PLANT_BEAN_SHARECODES) {
-    console.log(`您未填写助力码变量，开始账号内互助，再帮【zero205】助力`);
-    $.newShareCode = [...(jdPlantBeanShareArr || []), ...(newShareCodes || [])]
-  } else {
-    $.newShareCode = newShareCodes
-  }
-  for (let plantUuid of $.newShareCode) {
+  const shareCodes=[...(jdPlantBeanShareArr || []), ...(['e7lhibzb3zek3rmcwbjsu6jmqa3chfrp3phhzgq'])];
+  for (let plantUuid of shareCodes) {
     console.log(`${$.UserName}开始助力: ${plantUuid}`);
     if (!plantUuid) continue;
     if (plantUuid === $.myPlantUuid) {
@@ -588,26 +583,25 @@ function readShareCode() {
 }
 //格式化助力码
 function shareCodesFormat() {
-  return;
   return new Promise(async resolve => {
-    console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    newShareCodes = [];
-    if ($.shareCodesArr[$.index - 1]) {
-      newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    } else {
-      // console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
-      const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
-      newShareCodes = shareCodes[tempIndex].split('@');
-    }
-    if (!ZLC) {
-      console.log(`您设置了不加入助力池，跳过\n`)
-    } else {
-      const readShareCodeRes = await readShareCode();
-      if (readShareCodeRes && readShareCodeRes.code === 200) {
-        newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
-      }
-    }
-    console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
+    // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
+    // newShareCodes = [];
+    // if ($.shareCodesArr[$.index - 1]) {
+    //   newShareCodes = $.shareCodesArr[$.index - 1].split('@');
+    // } else {
+    //   // console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
+    //   const tempIndex = $.index > shareCodes.length ? (shareCodes.length - 1) : ($.index - 1);
+    //   newShareCodes = shareCodes[tempIndex].split('@');
+    // }
+    // if (!ZLC) {
+    //   console.log(`您设置了不加入助力池，跳过\n`)
+    // } else {
+    //   const readShareCodeRes = await readShareCode();
+    //   if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //     newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+    //   }
+    // }
+    // console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })
 }

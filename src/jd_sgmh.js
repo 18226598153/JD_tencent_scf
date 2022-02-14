@@ -28,7 +28,7 @@ const $ = new Env('闪购盲盒');
 const jdCookieNode = $.isNode() ? require('./jdCookie.js') : '';
 let appId = '1EFRXxg' , homeDataFunPrefix = 'interact_template', collectScoreFunPrefix = 'harmony', message = ''
 let lotteryResultFunPrefix = homeDataFunPrefix, browseTime = 6
-const inviteCodes = ['T0225KkcRUxL9FKDJh7ylvMLcACjVWmIaW5kRrbA','T0225KkcRx0Q_AaCdRr1xf8DIQCjVWmIaW5kRrbA','T0225KkcRksZpgDSIBj3xvADdQCjVWmIaW5kRrbA','T018v_52Qxge81HeJB2b1ACjVWmIaW5kRrbA','T0205KkcPFd_vD2uSkCi3YhXCjVWmIaW5kRrbA','T018v_hzQhwZ8FbUIRib1ACjVQmoaT5kRrbA'].sort(() => 0.5 - Math.random()).splice(0,3)
+const inviteCodes = ['T0225KkcRE0Q91XQIBrwkaRbIgCjVQmoaT5kRrbA']
 const ZLC = !(process.env.JD_JOIN_ZLC && process.env.JD_JOIN_ZLC === 'false')
 const randomCount = $.isNode() ? 20 : 5;
 const notify = $.isNode() ? require('./sendNotify') : '';
@@ -126,7 +126,7 @@ function interact_template_getHomeData(timeout = 0) {
             if (data.data.result.taskVos[i].taskName === '邀请好友助力') {
               console.log(`\n【京东账号${$.index}（${$.UserName}）的${$.name}好友互助码】${data.data.result.taskVos[i].assistTaskDetailVo.taskToken}\n`);
               self_code.push(data.data.result.taskVos[i].assistTaskDetailVo.taskToken)
-              for (let code of $.newShareCodes) {
+              for (let code of inviteCodes) {
                 if (!code) continue
                 const c =  await harmony_collectScore(code, data.data.result.taskVos[i].taskId);
                 await $.wait(2000)
@@ -277,29 +277,29 @@ function showMsg() {
 
 function requireConfig() {
   return new Promise(async resolve => {
-    console.log(`开始获取${$.name}配置文件\n`);
-    //Node.js用户请在jdCookie.js处填写京东ck;
-    let shareCodes = []
-    console.log(`共${cookiesArr.length}个京东账号\n`);
-    if ($.isNode() && process.env.JDSGMH_SHARECODES) {
-      if (process.env.JDSGMH_SHARECODES.indexOf('\n') > -1) {
-        shareCodes = process.env.JDSGMH_SHARECODES.split('\n');
-      } else {
-        shareCodes = process.env.JDSGMH_SHARECODES.split('&');
-      }
-    }
-    $.shareCodesArr = [];
-    if ($.isNode()) {
-      Object.keys(shareCodes).forEach((item) => {
-        if (shareCodes[item]) {
-          $.shareCodesArr.push(shareCodes[item])
-        }
-      })
-    } else {
-      if ($.getdata('JDSGMH_SHARECODES')) $.shareCodesArr = $.getdata('JDSGMH_SHARECODES').split('\n').filter(item => !!item);
-      console.log(`\nBoxJs设置的闪购盲盒邀请码:${$.getdata('JDSGMH_SHARECODES')}\n`);
-    }
-    console.log(`您提供了${$.shareCodesArr.length}个账号的${$.name}助力码\n`);
+    // console.log(`开始获取${$.name}配置文件\n`);
+    // //Node.js用户请在jdCookie.js处填写京东ck;
+    // let shareCodes = []
+    // console.log(`共${cookiesArr.length}个京东账号\n`);
+    // if ($.isNode() && process.env.JDSGMH_SHARECODES) {
+    //   if (process.env.JDSGMH_SHARECODES.indexOf('\n') > -1) {
+    //     shareCodes = process.env.JDSGMH_SHARECODES.split('\n');
+    //   } else {
+    //     shareCodes = process.env.JDSGMH_SHARECODES.split('&');
+    //   }
+    // }
+    // $.shareCodesArr = [];
+    // if ($.isNode()) {
+    //   Object.keys(shareCodes).forEach((item) => {
+    //     if (shareCodes[item]) {
+    //       $.shareCodesArr.push(shareCodes[item])
+    //     }
+    //   })
+    // } else {
+    //   if ($.getdata('JDSGMH_SHARECODES')) $.shareCodesArr = $.getdata('JDSGMH_SHARECODES').split('\n').filter(item => !!item);
+    //   console.log(`\nBoxJs设置的闪购盲盒邀请码:${$.getdata('JDSGMH_SHARECODES')}\n`);
+    // }
+    // console.log(`您提供了${$.shareCodesArr.length}个账号的${$.name}助力码\n`);
     resolve()
   })
 }
@@ -308,21 +308,21 @@ function requireConfig() {
 function shareCodesFormat() {
   return new Promise(async resolve => {
     // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    $.newShareCodes = [];
-    if ($.shareCodesArr[$.index - 1]) {
-      console.log('检测到助力码环境变量,在前')
-      $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    }
-    $.newShareCodes = [...new Set([...$.newShareCodes, ...self_code,...inviteCodes])]
-    if (!ZLC) {
-      console.log(`您设置了不加入助力池，跳过\n`)
-    } else {
-      const readShareCodeRes = await readShareCode();
-      if (readShareCodeRes && readShareCodeRes.code === 200) {
-        $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])]
-      }
-    }
-    console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
+    // $.newShareCodes = [];
+    // if ($.shareCodesArr[$.index - 1]) {
+    //   console.log('检测到助力码环境变量,在前')
+    //   $.newShareCodes = $.shareCodesArr[$.index - 1].split('@');
+    // }
+    // $.newShareCodes = [...new Set([...$.newShareCodes, ...self_code,...inviteCodes])]
+    // if (!ZLC) {
+    //   console.log(`您设置了不加入助力池，跳过\n`)
+    // } else {
+    //   const readShareCodeRes = await readShareCode();
+    //   if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //     $.newShareCodes = [...new Set([...$.newShareCodes, ...(readShareCodeRes.data || [])])]
+    //   }
+    // }
+    // console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify($.newShareCodes)}`)
     resolve();
   })
 }
