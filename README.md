@@ -2,13 +2,13 @@
 
 ## 简介
 
-打京豆的脚本部署流程, 非脚本作者, 该仓库为使用说明, 每个月能打1500(不确定)左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署), 不计划设计助力池.
+打京豆的脚本部署流程, 非脚本作者, 该仓库为使用说明, 每个月能打1500左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署), 不计划设计助力池.
 
 ## 腾讯云函数部署
 
 ### 开通云函数服务
 
-创建腾讯云账号, 依次进入 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，并创建相应[服务角色](https://console.cloud.tencent.com/cam/role)**SCF_QcsRole、SLS_QcsRole**, 腾讯云日志服务不再免费, 余额为0建议往账户里面充值1元, 防止欠费被禁用.
+创建腾讯云账号, 依次进入 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，(非必须, 没有再创建)并保证[服务角色](https://console.cloud.tencent.com/cam/role)有**SCF_QcsRole、SLS_QcsRole**, 腾讯云日志服务不再免费, 余额为0建议往账户里面充值1元, 防止欠费被禁用.
 
 > 为了确保权限足够，不要使用子账户！腾讯云账户需要[实名认证](https://console.cloud.tencent.com/developer/auth)才可使用。
 
@@ -39,19 +39,19 @@
 多账户配置方式:
 
 1. 通过[模板方式创建仓库](./wiki/importRepo.md)
-2. 编辑自己仓库src/jdCookie.js中的CookieJDs变量(文件内有其他配置方式介绍), 生成一个新提交.
+2. 编辑自己仓库src/jdCookie.js中的CookieJDs变量(文件内有配置方式介绍), 生成一个新提交.
 
-### 日志和测试
+### 日志和执行
 
 点击云函数, 可在**日志查询**面板查看定时执行的任务日志.
 
 ![](image/README/1644476536637.png)
 
-手动测试流程:
+手动执行流程:
 
 1. 点击云函数->函数代码->切换到旧版编辑器
-2. 拉到编辑器下面, 就可以看到测试输入框了
-3. 将message修改中的内容修改为脚本对应的名称, 测试多个脚本通过&符号连接.
+2. 拉到编辑器下面, 可以看到测试输入框
+3. 将message修改中的内容修改为脚本对应的名称, 测试多个脚本通过&符号连接, 输入**all**则执行全部.
 
 ![img](image/README/1644476708924.png)
 
