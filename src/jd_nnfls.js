@@ -123,6 +123,7 @@ function getShareCode(name, author = 'zero205', num = -1, shuffle = false) {
 
 
 async function help(sharecode) {
+    return;
     console.log(`${$.UserName} 去助力 ${sharecode}`)
     res = await api('sign/helpSign', 'flag,sceneval,token', { flag: 0, token: sharecode })
     await $.wait(3000)

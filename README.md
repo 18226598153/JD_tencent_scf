@@ -36,6 +36,11 @@
 1. 上传函数超时: 重新执行部署工作流直至成功
 2. 未配置TENCENT_FUNCTION_NAME参数, 不配置会导致失败, 这是腾讯云的bug
 
+多账户配置方式:
+
+1. 通过[模板方式创建仓库](./wiki/importRepo.md)
+2. 编辑自己仓库src/jdCookie.js中的CookieJDs变量(文件内有其他配置方式介绍), 生成一个新提交.
+
 ### 日志和测试
 
 点击云函数, 可在**日志查询**面板查看定时执行的任务日志.
@@ -82,6 +87,8 @@
 5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
 
 ![image](https://user-images.githubusercontent.com/27798227/153328329-b0854a0b-a279-4be9-aabe-f27fee1bb752.png)
+
+6. 多账号配置: 需要使用JD_COOKIE变量, 在配置文件中增加: export JD_COOKIE="pt_key=XXX;pt_pin=XXX;&pt_key=XXX;pt_pin=XXX;"
 
 ## 特别声明
 

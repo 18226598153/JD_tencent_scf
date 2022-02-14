@@ -13,12 +13,12 @@ if(process.env.PT_KEY && process.env.PT_PIN){
 if (process.env.JD_COOKIE) {
   if (process.env.JD_COOKIE.indexOf('&') > -1) {
     console.log(`您的cookie选择的是用&隔开\n`)
-    CookieJDs = process.env.JD_COOKIE.split('&');
+    CookieJDs = CookieJDs.concat(process.env.JD_COOKIE.split('&'));
   } else if (process.env.JD_COOKIE.indexOf('\n') > -1) {
     console.log(`您的cookie选择的是用换行隔开\n`)
-    CookieJDs = process.env.JD_COOKIE.split('\n');
+    CookieJDs = CookieJDs.concat(process.env.JD_COOKIE.split('\n'));
   } else {
-    CookieJDs = [process.env.JD_COOKIE];
+    CookieJDs.push(process.env.JD_COOKIE)
   }
 }
 /*

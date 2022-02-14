@@ -300,7 +300,7 @@ async function masterHelpInit() {
  */
 async function slaveHelp() {
   //$.log(`\n因1.6日好友助力功能下线。故暂时屏蔽\n`)
-  //return
+  return
   let helpPeoples = '';
   if ($.isNode() && !process.env.PETSHARECODES) {
     console.log(`您未填写助力码变量，开始账号内互助，再帮【zero205】助力`);

@@ -1,6 +1,6 @@
 #组件信息
 component: scf # (必选) 组件名称，在该实例中为scf
-name: jd-script # (必选) 组件实例名称。
+name: dj-dadoudou # (必选) 组件实例名称。
 
 #组件参数配置
 inputs:
@@ -10,14 +10,12 @@ inputs:
   src: 
     src: ./
     exclude:
-      - '*.!(js|txt|json)'
-      - 'backUp/**'
+      - '*.!(js|json)'
       - 'package-lock.json'
-      - 'LICENSE'
       - 'ql.js'
       - 'jd_CheckCK.js'
   handler: index.main_handler #入口
-  runtime: Nodejs12.16 # 运行环境 默认 Nodejs12.16
+  runtime: Nodejs14.18 # 运行环境 默认 Nodejs12.16
   region: ap-guangzhou # 函数所在区域
   description: This is a function in ${app} application.
   memorySize: 64 # 内存大小，单位MB

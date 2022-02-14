@@ -531,6 +531,7 @@ function hitGroup() {
 }
 
 function help(shareCode, groupCode, isTask = 0) {
+  return;
   return new Promise(resolve => {
     const body = {
       "activeType": 2,

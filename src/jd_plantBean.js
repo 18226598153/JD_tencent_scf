@@ -89,7 +89,7 @@ $.newShareCode = [];
       $.UserName = decodeURIComponent(cookie.match(/pt_pin=([^; ]+)(?=;?)/) && cookie.match(/pt_pin=([^; ]+)(?=;?)/)[1])
       $.index = j + 1;
       await shareCodesFormat();
-      await doHelp()
+      // await doHelp()
     }
   }
   if ($.isNode() && allMessage) {
@@ -588,6 +588,7 @@ function readShareCode() {
 }
 //格式化助力码
 function shareCodesFormat() {
+  return;
   return new Promise(async resolve => {
     console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
     newShareCodes = [];

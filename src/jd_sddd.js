@@ -130,7 +130,7 @@ if ($.isNode()) {
         console.log(`获取活动详情成功`);
       }
       await $.wait(3000);
-      await help();
+      // await help();
       await $.wait(2000);
     }
   }
@@ -364,9 +364,9 @@ async function helpMain(){
       $.rewardRecordId = $.detail.rewardRecordId;
       console.log(`获取活动详情成功`);
     }
-    await $.wait(3000);
-    await help();
-    await $.wait(2000);
+    // await $.wait(3000);
+    // await help();
+    // await $.wait(2000);
   }
 }
 
