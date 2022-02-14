@@ -8,6 +8,7 @@ const { readFileSync, existsSync } = require('fs')
 exports.main_handler = async (event, context, callback) => {
     console.log(`开始执行: 参数为:${JSON.stringify(event)}`)
     const msg = event.Message;
+    const async = event.async;
     let scripts = []
     if (event.TriggerName == 'config') {
         scripts = loadScripts(msg);
@@ -45,7 +46,7 @@ exports.main_handler = async (event, context, callback) => {
         }
     })
     // 脚本只能通过新开进程来检测结束状态, 当要执行的脚本数量小于4时, 采取多进程的方式执行, 用于显示完整日志.
-    if(scripts.length<=4 || msg=='all'){
+    if(scripts.length<=1 || msg=='all' && !async){
         const tasks = scripts.map(script => {
             console.log(`run script:${script}`)
             const name = './' + script + '.js'

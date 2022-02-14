@@ -262,12 +262,7 @@ async function algorithm() {
   })
 }
 async function helpFriends() {
-  if ($.isNode() && !process.env.DDFACTORY_SHARECODES) {
-    console.log(`您未填写助力码变量，开始账号内互助，再帮【zero205】助力`);
-    $.newShareCode = [...(jdFactoryShareArr || []), ...(newShareCodes || [])]
-  } else {
-    $.newShareCode = newShareCodes
-  }
+  $.newShareCode = [...(jdFactoryShareArr || []), ...(['T0225KkcRE0Q91XQIBrwkaRbIgCjVWnYaS5kRrbA'])]
   for (let code of $.newShareCode) {
     if (!code) continue
     const helpRes = await jdfactory_collectScore(code);
@@ -720,24 +715,24 @@ function readShareCode() {
 //格式化助力码
 function shareCodesFormat() {
   return new Promise(async resolve => {
-    console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
-    newShareCodes = [];
-    if ($.shareCodesArr[$.index - 1]) {
-      newShareCodes = $.shareCodesArr[$.index - 1].split('@');
-    } else {
-      // console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
-      const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
-      newShareCodes = inviteCodes[tempIndex].split('@');
-    }
-    if (!ZLC) {
-      console.log(`您设置了不加入助力池，跳过\n`)
-    } else {
-      const readShareCodeRes = await readShareCode();
-      if (readShareCodeRes && readShareCodeRes.code === 200) {
-        newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
-      }
-    }
-    console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
+    // console.log(`第${$.index}个京东账号的助力码:::${$.shareCodesArr[$.index - 1]}`)
+    // newShareCodes = [];
+    // if ($.shareCodesArr[$.index - 1]) {
+    //   newShareCodes = $.shareCodesArr[$.index - 1].split('@');
+    // } else {
+    //   // console.log(`由于您第${$.index}个京东账号未提供shareCode,将采纳本脚本自带的助力码\n`)
+    //   const tempIndex = $.index > inviteCodes.length ? (inviteCodes.length - 1) : ($.index - 1);
+    //   newShareCodes = inviteCodes[tempIndex].split('@');
+    // }
+    // if (!ZLC) {
+    //   console.log(`您设置了不加入助力池，跳过\n`)
+    // } else {
+    //   const readShareCodeRes = await readShareCode();
+    //   if (readShareCodeRes && readShareCodeRes.code === 200) {
+    //     newShareCodes = [...new Set([...newShareCodes, ...(readShareCodeRes.data || [])])];
+    //   }
+    // }
+    // console.log(`第${$.index}个京东账号将要助力的好友${JSON.stringify(newShareCodes)}`)
     resolve();
   })
 }

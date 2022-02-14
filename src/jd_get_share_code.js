@@ -57,10 +57,10 @@ if ($.isNode()) {
       await getShareCode()
     }
   }
-  for (var key of activityMap.keys()) {
-    let botValue = Array.from(new Set(activityMap.get(key))).join("&");
-    console.log("/" + key + " " + botValue+'\n');
-  }
+  // for (var key of activityMap.keys()) {
+  //   let botValue = Array.from(new Set(activityMap.get(key))).join("&");
+  //   console.log("/" + key + " " + botValue+'\n');
+  // }
 })()
     .catch((e) => {
       $.log('', `❌ ${$.name}, 失败! 原因: ${e}!`, '')
