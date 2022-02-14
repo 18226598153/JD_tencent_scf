@@ -78,7 +78,7 @@
    2. 在浏览器访问127.0.0.1:5600, 按照提示完成初始化
 3. 在青龙面板**右上角点击新建任务**, 配置:
 
-   - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "icon" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
+   - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "test|new|test_index" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
    - 定时规则: 50 0 0 * *
      ![img](image/README/1644410122098.png)
 4. 配置青龙面板
