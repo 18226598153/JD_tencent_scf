@@ -77,7 +77,7 @@
 3. 在青龙面板**右上角点击新建任务**, 配置:
 
    - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "icon" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
-   - 定时规则: 50 0 0 * *  
+   - 定时规则: 50 0 0 * *
      ![img](image/README/1644410122098.png)
 4. 配置青龙面板
 
@@ -89,6 +89,13 @@
 ![image](https://user-images.githubusercontent.com/27798227/153328329-b0854a0b-a279-4be9-aabe-f27fee1bb752.png)
 
 6. 多账号配置: 需要使用JD_COOKIE变量, 在配置文件中增加: export JD_COOKIE="pt_key=XXX;pt_pin=XXX;&pt_key=XXX;pt_pin=XXX;"
+
+## 消息推送
+
+当cookie失效后进行消息推送, 将对应推送的**Token**加到**环境变量**即可推送
+
+- [Server酱](https://sct.ftqq.com/sendkey): PUSH_KEY
+- [推送加](http://www.pushplus.plus/): PUSH_PLUS_TOKEN
 
 ## 特别声明
 

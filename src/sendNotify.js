@@ -11,6 +11,7 @@
  */
 
 const querystring = require('querystring');
+const { getEnv } = require('./util/getEnv');
 const $ = new Env();
 const timeout = 15000; //超时时间(单位毫秒)
 // =======================================gotify通知设置区域==============================================
@@ -32,7 +33,7 @@ let GOBOT_QQ = ''; // 如果GOBOT_URL设置 /send_private_msg 则需要填入 us
 // =======================================微信server酱通知设置区域===========================================
 //此处填你申请的SCKEY.
 //(环境变量名 PUSH_KEY)
-let SCKEY = '';
+let SCKEY = getEnv("PUSH_KEY");
 
 // =======================================Bark App通知设置区域===========================================
 //此处填你BarkAPP的信息(IP/设备码，例如：https://api.day.app/XXXXXXXX)
@@ -87,7 +88,7 @@ let IGOT_PUSH_KEY = '';
 //官方文档：http://www.pushplus.plus/
 //PUSH_PLUS_TOKEN：微信扫码登录后一对一推送或一对多推送下面的token(您的Token)，不提供PUSH_PLUS_USER则默认为一对一推送
 //PUSH_PLUS_USER： 一对多推送的“群组编码”（一对多推送下面->您的群组(如无则新建)->群组编码，如果您是创建群组人。也需点击“查看二维码”扫描绑定，否则不能接受群组消息推送）
-let PUSH_PLUS_TOKEN = '';
+let PUSH_PLUS_TOKEN = getEnv('PUSH_PLUS_TOKEN');
 let PUSH_PLUS_USER = '';
 
 //==========================云端环境变量的判断与接收=========================
@@ -109,10 +110,6 @@ if (process.env.GOBOT_TOKEN) {
 }
 if (process.env.GOBOT_QQ) {
   GOBOT_QQ = process.env.GOBOT_QQ;
-}
-
-if (process.env.PUSH_KEY) {
-  SCKEY = process.env.PUSH_KEY;
 }
 
 if (process.env.QQ_SKEY) {
@@ -179,9 +176,6 @@ if (process.env.IGOT_PUSH_KEY) {
   IGOT_PUSH_KEY = process.env.IGOT_PUSH_KEY;
 }
 
-if (process.env.PUSH_PLUS_TOKEN) {
-  PUSH_PLUS_TOKEN = process.env.PUSH_PLUS_TOKEN;
-}
 if (process.env.PUSH_PLUS_USER) {
   PUSH_PLUS_USER = process.env.PUSH_PLUS_USER;
 }
@@ -195,12 +189,7 @@ if (process.env.PUSH_PLUS_USER) {
  * @param author 作者仓库等信息  例：`本通知 By：https://github.com/whyour/qinglong`
  * @returns {Promise<unknown>}
  */
-async function sendNotify(
-  text,
-  desp,
-  params = {'TG交流群':'https://t.me/jd_zero_205'},
-  author = '\n\n请更新拉库命令:https://github.com/zero205/JD_tencent_scf/tree/main',
-) {
+async function sendNotify( text, desp, params = {'TG交流群':'https://t.me/jd_zero_205'}, author = '\n\n请更新拉库命令:https://github.com/zero205/JD_tencent_scf/tree/main', ) {
   let no_notify = process.env.no_notify
   if (no_notify) {
     no_notify = process.env.no_notify.split('&')
@@ -833,7 +822,7 @@ function pushPlusNotify(text, desp) {
         token: `${PUSH_PLUS_TOKEN}`,
         title: `${text}`,
         content: `${desp}`,
-        topic: `${PUSH_PLUS_USER}`,
+        // topic: `${PUSH_PLUS_USER}`,
       };
       const options = {
         url: `https://www.pushplus.plus/send`,
