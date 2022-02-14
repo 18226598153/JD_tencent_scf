@@ -60,11 +60,11 @@ const JD_API_HOST = 'https://api.m.jd.com/client.action';
         continue
       }
       await info()
-      if (InviterPin.length != 0) {
-        await help()
-      } else {
-        await help2("zero205",Math.random() > 0.5 ? "%2FeNHdfn6fP%2BTFwVda3ipjWwvTFqeKBZaRG38adWABKk%3D" : "Sev6JWjut6GyaEHJIWpSQQ%3D%3D")        
-      }
+      // if (InviterPin.length != 0) {
+      //   await help()
+      // } else {
+      //   await help2("zero205",Math.random() > 0.5 ? "%2FeNHdfn6fP%2BTFwVda3ipjWwvTFqeKBZaRG38adWABKk%3D" : "Sev6JWjut6GyaEHJIWpSQQ%3D%3D")        
+      // }
     }
   }
 })()

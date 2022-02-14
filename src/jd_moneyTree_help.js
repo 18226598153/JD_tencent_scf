@@ -110,6 +110,7 @@ $.shareCodes = []
   })
 
 async function helpFriends() {
+  return;
   try {
     for (let code of $.newShareCodes) {
       console.log(`去助力${code}`)
@@ -164,6 +165,7 @@ function getsharePin() {
 }
 
 function help(sharePin) {
+  return;
   const params = { "sharePin": sharePin, "shareType": 1, "channelLV": "", "source": 2, "riskDeviceParam": { "eid": "", "fp": "", "sdkToken": "", "token": "", "jstub": "", "appType": "2", } }
   params.riskDeviceParam = JSON.stringify(params.riskDeviceParam);
   return new Promise((resolve, reject) => {
@@ -258,6 +260,7 @@ function requireConfig() {
 }
 
 function shareCodesFormat() {
+  return;
   return new Promise(async resolve => {
     $.newShareCodes = [];
     let inviteCodes = [
