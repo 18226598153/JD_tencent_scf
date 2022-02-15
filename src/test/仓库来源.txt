@@ -1,3 +1,4 @@
 - https://github.com/curtinlv/JD-Script
 - https://github.com/Hyper-Beast/JD_Scripts
 - https://github.com/Aaron-lv/sync
+- https://github.com/utterliar1/jd_scripts
