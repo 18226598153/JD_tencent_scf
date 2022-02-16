@@ -11,7 +11,7 @@
 ### 开通云函数服务
 
 1. 创建腾讯云账号, 依次进入 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务.
-2. 腾讯云日志服务不免费, 余额为0建议往账户里面**充值1元**, 防止欠费被禁用.
+2. 腾讯云日志服务不免费(很便宜), 余额为0建议往账户里面**充值1元**, 防止欠费被禁用.
 3. **非必须, 没有再创建**: 不使用子账户, 保证有**SCF_QcsRole、SLS_QcsRole**权限的[服务角色](https://console.cloud.tencent.com/cam/role).
 
 ### 配置环境变量
