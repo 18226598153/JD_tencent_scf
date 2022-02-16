@@ -16,7 +16,7 @@
 
 ### 配置环境变量
 
-创建github账号, **fork此仓库**或以此[仓库模板创建](./wiki/importRepo.md), 仓库建立完成, 在**自己的仓库**内依次点击**settings->secrets->Actions**
+创建github账号, **fork此仓库**或以此[仓库为模板创建](./wiki/importRepo.md), 仓库建立完成, 在**自己的仓库**内依次点击**settings->secrets->Actions**
 
 通过点击**New repository secret**, 分别添加:
 
