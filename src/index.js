@@ -1,10 +1,5 @@
 const { execFile } = require('child_process');
 const { readFileSync, existsSync } = require('fs')
-/**
- * 脚本触发器列表:
- * - config: 每小时候执行一次config.json中配置的脚本, 当前小时和脚本配置的小时一致时, 进行执行
- * - 其他cron: 都是单脚本, argument中指定的就是脚本名称
- */
 exports.main_handler = async (event, context, callback) => {
     console.log(`开始执行: 参数为:${JSON.stringify(event)}`)
     const msg = event.Message;
