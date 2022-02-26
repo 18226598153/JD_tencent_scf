@@ -2,21 +2,21 @@
 
 ## 简介
 
-打京豆的脚本部署流程, 非脚本作者, 该仓库为使用说明, 每个月能打1500左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署), 不计划设计助力池.
+非脚本作者, 该仓库为打京豆的脚本部署流程, 每个月能打1500左右, 如果你的计算机有安装Docker, 推荐使用[本地部署](#本地部署)方式, 没有就使用[腾讯云函数部署](#腾讯云函数部署), 不计划设计助力池, 如果对你有帮助, 可给这个项目点下star.
 
-农场需手动开启: JD APP->免费水果->选择任一水果
+农场需激活: JD APP->免费水果->选择任一水果
 
 ## 腾讯云函数部署
 
 ### 开通云函数服务
 
-创建腾讯云账号, 依次进入 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务，(非必须, 没有再创建)并保证[服务角色](https://console.cloud.tencent.com/cam/role)有**SCF_QcsRole、SLS_QcsRole**, 腾讯云日志服务不再免费, 余额为0建议往账户里面充值1元, 防止欠费被禁用.
-
-> 为了确保权限足够，不要使用子账户！腾讯云账户需要[实名认证](https://console.cloud.tencent.com/developer/auth)才可使用。
+1. 创建腾讯云账号, 依次进入 [SCF 云函数控制台](https://console.cloud.tencent.com/scf) 和 [SLS 控制台](https://console.cloud.tencent.com/sls) 开通相关服务.
+2. 腾讯云日志服务不免费(很便宜), 余额为0建议往账户里面**充值1元**, 防止欠费被禁用.
+3. **非必须, 没有再创建**: 不使用子账户, 保证有**SCF_QcsRole、SLS_QcsRole**权限的[服务角色](https://console.cloud.tencent.com/cam/role).
 
 ### 配置环境变量
 
-创建github账号, **fork此仓库**或以此[仓库模板创建(推荐)](./wiki/importRepo.md), 仓库建立完成, 在**自己的仓库**内依次点击**settings->secrets->Actions**
+创建github账号, **fork此仓库**或以此[仓库为模板创建](./wiki/importRepo.md), 仓库建立完成, 在**自己的仓库**内依次点击**settings->secrets->Actions**
 
 通过点击**New repository secret**, 分别添加:
 
