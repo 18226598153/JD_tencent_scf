@@ -40,51 +40,37 @@ exports.main_handler = async (event, context, callback) => {
             }
         }
     })
-    // 脚本只能通过新开进程来检测结束状态, 当要执行的脚本数量小于4时, 采取多进程的方式执行, 用于显示完整日志.
-    // if ((scripts.length <= 1 || msg == 'all') && !async) {
-    //     const tasks = scripts.map(script => {
-    //         console.log(`run script:${script}`)
-    //         const name = './' + script + '.js'
-    //         return new Promise((resolve) => {
-    //             const child = execFile(process.execPath, [name])
-    //             child.stdout.on('data', function (data) {
-    //                 console.log(data)
-    //             })
-    //             child.stderr.on('data', function (data) {
-    //                 console.error(data)
-    //             })
-    //             child.on('close', function (code) {
-    //                 console.log(`${script} finished`)
-    //                 delete child
-    //                 resolve()
-    //             })
-    //         })
-    //     })
-    //     await Promise.all(tasks)
-    // } else {
-        for (const script of scripts) {
-            console.log(`run script:${script}`)
-            const name = './' + script + '.js'
-            await new Promise((resolve) => {
-                const child = execFile(process.execPath, [name])
-                child.stdout.on('data', function (data) {
-                    console.log(data)
-                })
-                child.stderr.on('data', function (data) {
-                    console.error(data)
-                })
-                child.on('close', function (code) {
-                    console.log(`${script} finished`)
-                    delete child
-                    resolve()
-                })
-            })
 
+
+    const tasks = [];
+    const count=3;
+    for (let i = 0; i < scripts.length; i++) {
+        const script = scripts[i];
+        if (i > count) {
+            await tasks[i - count];
+            delete tasks[i - count];
         }
-        // return '脚本执行中...'
-    // }
+        console.log(`run script:${script}`)
+        const name = './' + script + '.js'
+        tasks[i] = new Promise((resolve) => {
+            const child = execFile(process.execPath, [name])
+            child.stdout.on('data', function (data) {
+                console.log(data)
+            })
+            child.stderr.on('data', function (data) {
+                console.error(data)
+            })
+            child.on('close', function (code) {
+                console.log(`${script} finished`)
+                delete child
+                resolve()
+            })
+        })
+    }
 
-    // return '执行完毕';
+    await Promise.all(tasks)
+
+    return '执行完毕';
 }
 
 
