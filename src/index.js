@@ -41,11 +41,31 @@ exports.main_handler = async (event, context, callback) => {
         }
     })
     // 脚本只能通过新开进程来检测结束状态, 当要执行的脚本数量小于4时, 采取多进程的方式执行, 用于显示完整日志.
-    if((scripts.length<=1 || msg=='all') && !async){
-        const tasks = scripts.map(script => {
+    // if ((scripts.length <= 1 || msg == 'all') && !async) {
+    //     const tasks = scripts.map(script => {
+    //         console.log(`run script:${script}`)
+    //         const name = './' + script + '.js'
+    //         return new Promise((resolve) => {
+    //             const child = execFile(process.execPath, [name])
+    //             child.stdout.on('data', function (data) {
+    //                 console.log(data)
+    //             })
+    //             child.stderr.on('data', function (data) {
+    //                 console.error(data)
+    //             })
+    //             child.on('close', function (code) {
+    //                 console.log(`${script} finished`)
+    //                 delete child
+    //                 resolve()
+    //             })
+    //         })
+    //     })
+    //     await Promise.all(tasks)
+    // } else {
+        for (const script of scripts) {
             console.log(`run script:${script}`)
             const name = './' + script + '.js'
-            return new Promise((resolve) => {
+            await new Promise((resolve) => {
                 const child = execFile(process.execPath, [name])
                 child.stdout.on('data', function (data) {
                     console.log(data)
@@ -59,22 +79,12 @@ exports.main_handler = async (event, context, callback) => {
                     resolve()
                 })
             })
-        })
-        await Promise.all(tasks)
-    }else{
-        for (const script of scripts) {
-            console.log(`run script:${script}`)
-            const name = './' + script + '.js'
-            try {
-                require(name)
-            } catch (e) {
-                console.error(`异步${script}异常:`, e)
-            }
-        }
-        return '脚本执行中...'
-    }
 
-    return '执行完毕';``
+        }
+        // return '脚本执行中...'
+    // }
+
+    // return '执行完毕';
 }
 
 
