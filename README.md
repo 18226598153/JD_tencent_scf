@@ -2,15 +2,41 @@
 
 ## 简介
 
-非脚本作者, 该仓库为打京豆的脚本部署流程, 每个月能打1500左右, [本地部署](#本地部署)方式, 每个月要更新一次cookie.
+非脚本作者, 该仓库为打京豆的脚本部署流程, 每个月能打1500左右, [本地部署](#Docker部署)方式, 每个月要更新一次cookie.
 
 注意这个仓库基本只剩长期活动的脚本有效, 新活动的脚本需要去别的仓库找, 我是当成玩具挂着玩, 不打算更新脚本.
 
 农场需激活: JD APP->免费水果->选择任一水果
 
+
+## Docker部署
+
+需要熟悉Docker的使用方式
+
+1. 安装Docker
+2. 安装青龙面板(用于定时执行脚本):
+
+   1. 运行青龙面板Docker镜像: `docker run -dit -v $PWD/ql/config:/ql/config -v $PWD/ql/log:/ql/log -v $PWD/ql/db:/ql/db -p 5600:5600 --name qinglong --hostname qinglong --restart always whyour/qinglong:latest`
+   2. 在浏览器访问127.0.0.1:5600, 按照提示完成初始化
+3. 在青龙面板**右上角点击新建任务**, 配置:
+
+   - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "test|new|test_index" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
+   - 定时规则: 50 0 0 * *
+     ![img](image/README/1644410122098.png)
+4. 配置青龙面板
+
+   - 添加: export PT_KEY=""和export PT_PIN="", [获取方式点这里](./wiki/GetJdCookie.md)
+   - 修改GithubProxyUrl为GithubProxyUrl=""
+     ![img](image/README/1644421618420.png)
+5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
+
+![image](https://user-images.githubusercontent.com/27798227/153328329-b0854a0b-a279-4be9-aabe-f27fee1bb752.png)
+
+6. 多账号配置: 需要使用JD_COOKIE变量, 在配置文件中增加: export JD_COOKIE="pt_key=XXX;pt_pin=XXX;&pt_key=XXX;pt_pin=XXX;"
+
 ## 腾讯云函数部署
 
-已废弃, 2022.6.1后腾讯云函数不再免费, 每个月需要最低收费12.8元, 不建议使用云函数方式部署了, 已使用云函数部署的建议立刻删掉.
+**已废弃**, 2022.6.1后腾讯云函数不再免费, 每个月需要最低收费12.8元, 不建议使用云函数方式部署了, 已使用云函数部署的建议立刻删掉.
 
 ### 开通云函数服务
 
@@ -71,30 +97,6 @@
 
 ![](image/README/1644497801258.png)
 
-## 本地部署
-
-需要熟悉Docker的使用方式
-
-1. 安装Docker
-2. 安装青龙面板(用于定时执行脚本):
-
-   1. 运行青龙面板Docker镜像: `docker run -dit -v $PWD/ql/config:/ql/config -v $PWD/ql/log:/ql/log -v $PWD/ql/db:/ql/db -p 5600:5600 --name qinglong --hostname qinglong --restart always whyour/qinglong:latest`
-   2. 在浏览器访问127.0.0.1:5600, 按照提示完成初始化
-3. 在青龙面板**右上角点击新建任务**, 配置:
-
-   - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "test|new|test_index" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
-   - 定时规则: 50 0 0 * *
-     ![img](image/README/1644410122098.png)
-4. 配置青龙面板
-
-   - 添加: export PT_KEY=""和export PT_PIN="", [获取方式点这里](./wiki/GetJdCookie.md)
-   - 修改GithubProxyUrl为GithubProxyUrl=""
-     ![img](image/README/1644421618420.png)
-5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
-
-![image](https://user-images.githubusercontent.com/27798227/153328329-b0854a0b-a279-4be9-aabe-f27fee1bb752.png)
-
-6. 多账号配置: 需要使用JD_COOKIE变量, 在配置文件中增加: export JD_COOKIE="pt_key=XXX;pt_pin=XXX;&pt_key=XXX;pt_pin=XXX;"
 
 ## 消息推送
 
