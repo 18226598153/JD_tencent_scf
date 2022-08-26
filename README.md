@@ -27,7 +27,7 @@
 4. 配置青龙面板
 
    - 添加: export PT_KEY=""和export PT_PIN="", [获取方式点这里](./wiki/GetJdCookie.md)
-   - 修改GithubProxyUrl为GithubProxyUrl=""
+   - 如果执行任务失败, 修改GithubProxyUrl为GithubProxyUrl="" 
      ![img](image/README/1644421618420.png)
 5. 回到定时任务面板, 点击任务的运行按钮, 就会拉取所有的脚本, 并定时执行这些脚本, 也可手动点击脚本旁边的按钮执行.
 
