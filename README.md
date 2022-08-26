@@ -16,9 +16,9 @@
 1. 安装Docker
 2. 安装青龙面板(用于定时执行脚本):
 
-   1. mkdir ~/ql
-   2. 运行青龙面板Docker镜像: `docker run -dit -v ~/ql:/ql/data -p 5700:5700 --name qinglong --hostname qinglong --restart unless-stopped whyour/qinglong:latest`
-   3. 在浏览器访问127.0.0.1:5700, 按照提示完成初始化
+    - windows: docker run -dit -p 5700:5700 --name qinglong --hostname qinglong --restart unless-stopped whyour/qinglong:latest
+    - linux: docker run -dit -v ~/ql:/ql/data -p 5700:5700 --name qinglong --hostname qinglong --restart unless-stopped whyour/qinglong:latest
+    3. 在浏览器访问127.0.0.1:5700, 按照提示完成初始化
 3. 在青龙面板**右上角点击新建任务**, 配置:
 
    - 命令: ql repo https://github.com/cweijan/JD_tencent_scf.git "src"  "test|new|test_index" "^jd[^_]|USER|sendNotify|sign_graphics_validate|JDJR|JDSign|ql"
