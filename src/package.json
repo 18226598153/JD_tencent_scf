@@ -22,6 +22,7 @@
     "got": "^11.8.2",
     "http-server": "^0.12.3",
     "jsdom": "^17.0.0",
+    "moment": "^2.29.4",
     "png-js": "^1.0.0",
     "request": "^2.88.2",
     "tough-cookie": "^4.0.0",

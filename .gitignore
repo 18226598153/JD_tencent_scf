@@ -5,3 +5,4 @@ node_modules
 /JD_DailyBonus.js
 package-lock.json
 /sync/
+env.json
